@@ -64,14 +64,13 @@ protected:
     }
 };
 
-    template <typename T>
-    T& VectorBase<T>:: operator[](const unsigned int& pos) const
-    {
-        if (pos < 0 || pos >= size) {
-            throw -1;
-        }
-        return head[pos];
+template <typename T>
+T& VectorBase<T>::operator[](const unsigned int& pos) const {
+    if (pos >= size) { // 注意：应该是 >= size 而不是 > size
+        throw std::out_of_range("Index out of range");
     }
+    return head[pos];
+}
 
     template <typename T>
     bool VectorBase<T>:: operator==(const VectorBase<T>& v) const
@@ -104,40 +103,32 @@ protected:
     {
         return capacity;
     }
-
-    template <typename T>
-    void VectorBase<T>:: insert(const unsigned int& pos, const T& val, const unsigned int& n)
-    {
+template <typename T>
+void VectorBase<T>::insert(const unsigned int& pos, const T& val, const unsigned int& n) {
         if (pos < 0 || pos > size) {
-            throw -1;
+            throw std::out_of_range("位置超出范围");
         }
         if (size + n > capacity) {
             resize();
         }
-        for(unsigned int i=0 ;i<n ;i++)
-        {
-            for(unsigned int j=size+i-1 ;j>=pos - 1 ;j--)
-            {
-                *(this+j+1)=*(this+j);
-            }
+        // 将元素向后移动n个位置
+        for (unsigned int i = size; i > pos; --i) {
+            head[i + n - 1] = head[i - 1];
         }
-        for(unsigned int i=0 ;i<n ;i++)
-        {
-            *(this+pos-1+i)=val;
+        // 在pos位置插入n个val元素
+        for (unsigned int i = 0; i < n; ++i) {
+            head[pos + i] = val;
         }
         size += n;
     }
-
-    template <typename T>
-    void VectorBase<T>:: erase(const unsigned int& pos)
-    {
-        if (pos < 0 || pos >= size)
-        {
-            throw -1;
-        }
-        move(head + pos + 1, head + size, head + pos);
-        size--;
+template <typename T>
+void VectorBase<T>::erase(const unsigned int& pos) {
+    if (pos >= size) { // 注意：应该是 >= size 而不是 > size
+        throw std::out_of_range("Index out of range");
     }
+    std::move(head + pos + 1, head + size, head + pos); // 使用 std::move
+    size--;
+}
 
     template <typename T>
     void VectorBase<T>:: erase(const unsigned int& lt, const unsigned int& rt)
@@ -201,17 +192,23 @@ protected:
         size = 0;
     }
 
-    template <typename T>
-    void VectorBase<T>:: swap(VectorBase<T>& v)
-    {
-        swap(head, v.head);
-        swap(size, v.size);
-        swap(capacity, v.capacity);
+template <typename T>
+void VectorBase<T>::swap(VectorBase<T>& v) {
+        T* tempHead = head;
+        unsigned int tempSize = size;
+        unsigned int tempCapacity = capacity;
+
+        head = v.head;
+        size = v.size;
+        capacity = v.capacity;
+
+        v.head = tempHead;
+        v.size = tempSize;
+        v.capacity = tempCapacity;
     }
 
-    template <typename T>
-    void VectorBase<T>:: reverse()
-    {
-        reverse(head, head + size);
+template <typename T>
+void VectorBase<T>::reverse() {
+        std::reverse(head, head + size);
     }
 #endif
