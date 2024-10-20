@@ -2,7 +2,7 @@
 #include "DerivedString.h"
 #include <iostream>
 
-int main() {
+void StringTest() {
     DerivedString ds;
 
     // 测试 operator[] 和 at
@@ -59,6 +59,4 @@ int main() {
     ds3.push_back('o');
     std::cout << "ds == ds2: " << (ds == ds2 ? "Yes" : "No") << std::endl;
     std::cout << "ds != ds3: " << (ds != ds3 ? "Yes" : "No") << std::endl;
-
-    return 0;
 }

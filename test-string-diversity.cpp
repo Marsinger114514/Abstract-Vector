@@ -1,5 +1,5 @@
 #include "DerivedString.h"
-#include"VectorBase.h"
+#include "VectorBase.h"
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -106,10 +106,4 @@ void testStringDiversity2() {
     vec2->reverse();
     std::cout << "reverse 方法: ";
     vec2->putout(std::cout);
-}
-
-int main() {
-    //单独测试派生类
-    testderivedstring();
-    return 0;
 }

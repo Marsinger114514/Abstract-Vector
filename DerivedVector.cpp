@@ -2,9 +2,8 @@
 #include "DerivedVector.h"
 #include <iostream>
 
-int main() {
+void VectorTest() {
     DerivedVector<int> dv;
-
     // 测试 operator[] 和 at
     try {
         std::cout << "Accessing out-of-bounds index: " << dv.at(0) << std::endl;
@@ -51,6 +50,4 @@ int main() {
     dv3.push_back(6);
     std::cout << "dv == dv2: " << (dv == dv2 ? "Yes" : "No") << std::endl;
     std::cout << "dv != dv3: " << (dv != dv3 ? "Yes" : "No") << std::endl;
-
-    return 0;
 }
