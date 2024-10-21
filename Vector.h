@@ -10,9 +10,9 @@ public:
 	Vector() : VectorBase<T>() {}
 
 	// 带容量参数的构造函数
-	Vector(const unsigned int& s) : VectorBase<T>(s) {
+	Vector(const unsigned int& s) : VectorBase<T>() {
 		if (s > 0) {
-			this->size = s;
+			this->capacity = s;
 		}
 	}
 

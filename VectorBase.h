@@ -13,23 +13,8 @@ template <typename T>
 class VectorBase {
 public:
     VectorBase() : head(nullptr), size(0), capacity(1024) {}    // 构造函数
-
-    VectorBase(const VectorBase<T>& other) : size(other.size), capacity(other.capacity)     //深拷贝构造
-    {
-        head = new T[capacity];
-        for (int i = 0; i < size; i++) {
-            head[i] = other.head[i];
-        }
-    }
-    // 添加新的构造函数，用于设置初始容量
-    VectorBase(unsigned int initialCapacity) : head(nullptr), size(0), capacity(initialCapacity) {
-        if (capacity > 0) {
-            head = new T[capacity];
-        }
-    }
     virtual ~VectorBase()    // 析构函数
     {
-        clear();
         delete[] head;
     }
 
@@ -151,7 +136,7 @@ void VectorBase<T>:: erase(const unsigned int& lt, const unsigned int& rt)
 template <typename T>
 void VectorBase<T>:: push_back(const T &val)
     {
-        if (size == capacity)
+        if (size >= capacity)
         {
             resize();
         }
