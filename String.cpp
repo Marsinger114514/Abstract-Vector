@@ -27,11 +27,7 @@ String::String(const String& str) : VectorBase<char>(str) {
     head = new char[capacity];
     strcpy(head, str.head);
 }
-
-// 析构函数
-String::~String() {
-    delete[] head;
-}
+String::~String(){}
 
 // 运算符重载
 String String::operator+(const String& str) {

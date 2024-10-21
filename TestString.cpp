@@ -1,7 +1,5 @@
 #include "String.h"
 #include <iostream>
-#include <string>
-using namespace std;
 
 void testStringClass() {
     // ²âÊÔ¹¹Ôìº¯Êı

@@ -1,6 +1,3 @@
-//
-// Created by 18101 on 24-10-20.
-//
 #include "VectorBase.h"
 #include <iostream>
 #include <conio.h>
