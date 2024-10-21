@@ -21,7 +21,12 @@ public:
             head[i] = other.head[i];
         }
     }
-
+    // 添加新的构造函数，用于设置初始容量
+    VectorBase(unsigned int initialCapacity) : head(nullptr), size(0), capacity(initialCapacity) {
+        if (capacity > 0) {
+            head = new T[capacity];
+        }
+    }
     virtual ~VectorBase()    // 析构函数
     {
         clear();
@@ -66,7 +71,7 @@ protected:
 
 template <typename T>
 T& VectorBase<T>::operator[](const unsigned int& pos) const {
-    if (pos >= size) { // 注意：应该是 >= size 而不是 > size
+    if (pos >= size) {
         throw std::out_of_range("Index out of range");
     }
     return head[pos];
