@@ -29,9 +29,7 @@ public:
 	}
 
 	// 析构函数
-	~Vector() {
-		delete[] this->head;
-	}
+	~Vector() {}
 
 	// 运算符重载
 	Vector<T>& operator=(const Vector<T>& v) {

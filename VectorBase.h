@@ -12,7 +12,9 @@ using namespace std;
 template <typename T>
 class VectorBase {
 public:
-    VectorBase() : head(nullptr), size(0), capacity(1024) {}    // 构造函数
+    VectorBase() : head(nullptr), size(0), capacity(1024) {
+        head = new T[capacity];
+    }    // 构造函数
     virtual ~VectorBase() {
         delete[] head;
     }   // 析构函数
