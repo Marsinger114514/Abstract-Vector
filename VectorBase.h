@@ -77,12 +77,14 @@ T& VectorBase<T>::operator[](const unsigned int& pos) const {
     return head[pos];
 }
 
-    template <typename T>
-    bool VectorBase<T>:: operator==(const VectorBase<T>& v) const
-    {
-        if (size != v.size) {
-            return false;
-        }
+
+
+template <typename T>
+bool VectorBase<T>:: operator==(const VectorBase<T>& v) const
+{
+    if (size != v.size) {
+        return false;
+    }
         for (unsigned int i = 0; i < size; ++i) {
             if (head[i] != v.head[i]) {
                 return false;
@@ -91,8 +93,8 @@ T& VectorBase<T>::operator[](const unsigned int& pos) const {
         return true;
     }
 
-    template <typename T>
-    bool VectorBase<T>:: operator!=(const VectorBase<T>& v) const
+template <typename T>
+bool VectorBase<T>:: operator!=(const VectorBase<T>& v) const
     {
         return !(*this == v);
     }
@@ -135,8 +137,8 @@ void VectorBase<T>::erase(const unsigned int& pos) {
     size--;
 }
 
-    template <typename T>
-    void VectorBase<T>:: erase(const unsigned int& lt, const unsigned int& rt)
+template <typename T>
+void VectorBase<T>:: erase(const unsigned int& lt, const unsigned int& rt)
     {
         if (lt > rt || rt >= size)
         {
@@ -146,8 +148,8 @@ void VectorBase<T>::erase(const unsigned int& pos) {
         size -= (rt - lt + 1);
     }
 
-    template <typename T>
-    void VectorBase<T>:: push_back(const T &val)
+template <typename T>
+void VectorBase<T>:: push_back(const T &val)
     {
         if (size == capacity)
         {
@@ -194,7 +196,10 @@ void VectorBase<T>::erase(const unsigned int& pos) {
     template <typename T>
     void VectorBase<T>:: clear()
     {
-        size = 0;
+        delete[] head;  // 释放内存
+        head = nullptr;  // 重置指针
+        size = 0;        // 重置大小
+        capacity = 0;    // 重置容量
     }
 
 template <typename T>

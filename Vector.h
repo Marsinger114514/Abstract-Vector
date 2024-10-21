@@ -20,9 +20,31 @@ public:
 	Vector(const Vector<T>& v) : VectorBase<T>(v) {}
 
 	// 析构函数
-	~Vector() {}
+	~Vector() {
+		delete[] this->head;
+	}
 
 	// 运算符重载
+	Vector<T>& operator=(const Vector<T>& v) {
+		if (this == &v) {
+			return *this;  // 检查是否自我赋值
+		}
+
+		// 释放当前对象的内存
+		delete[] this->head;
+
+		// 为新对象分配内存并深拷贝元素
+		this->size = v.size;
+		this->capacity = v.capacity;
+		this->head = new T[this->capacity];
+
+		// 复制元素
+		for (unsigned int i = 0; i < this->size; ++i) {
+			this->head[i] = v.head[i];
+		}
+		return *this;
+	}
+
 	Vector<T> operator+(const Vector<T>& v) {
 		Vector<T> result(this->size + v.size);
 		for (unsigned int i = 0; i < this->size; i++) {

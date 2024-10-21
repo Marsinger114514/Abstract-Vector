@@ -4,7 +4,7 @@
 #include "VectorBase.h"
 #include <iostream>
 #include <conio.h>
-int Pos(char ch, const char *str)			// è¿”å›æŒ‡å®šå­—ç¬¦chåœ¨å­—ç¬¦ä¸²strä¸­çš„ä¸‹æ ‡ã€‚ä¸å­˜åœ¨æ—¶è¿”å›-1
+int Pos(char ch, const char *str)			// ·µ»ØÖ¸¶¨×Ö·ûchÔÚ×Ö·û´®strÖĞµÄÏÂ±ê¡£²»´æÔÚÊ±·µ»Ø-1
 {
     int i;
     for(i=0; str[i]!='\0'; i++)
@@ -13,53 +13,53 @@ int Pos(char ch, const char *str)			// è¿”å›æŒ‡å®šå­—ç¬¦chåœ¨å­—ç¬¦ä¸²strä¸­çš„
     return -1;
 }
 
-int Choice(const char *prompt, const char *options="");	// å‡½æ•°å£°æ˜
-int Choice(const char *prompt, const char *options)		// å‡½æ•°å®šä¹‰ã€‚è¾“å‡ºæç¤ºä¿¡æ¯promptï¼Œè¾“å…¥é€‰æ‹©çš„å­—ç¬¦å¹¶è¿”å›ã€‚
+int Choice(const char *prompt, const char *options="");	// º¯ÊıÉùÃ÷
+int Choice(const char *prompt, const char *options)		// º¯Êı¶¨Òå¡£Êä³öÌáÊ¾ĞÅÏ¢prompt£¬ÊäÈëÑ¡ÔñµÄ×Ö·û²¢·µ»Ø¡£
 {
     int key;
     cout << prompt << "{";
     for(int i=0; options[i]!='\0'; i++)
     {
-        if(' ' < (options[i] & 0x7f) && (options[i] & 0x7f) < 127)	// é€‰é¡¹optionsä¸­çš„å¯æ‰“å°å­—ç¬¦
+        if(' ' < (options[i] & 0x7f) && (options[i] & 0x7f) < 127)	// Ñ¡ÏîoptionsÖĞµÄ¿É´òÓ¡×Ö·û
             cout << options[i] << ' ';
-        else														// é€‰é¡¹optionsä¸­çš„éƒ¨åˆ†æ§åˆ¶å­—ç¬¦
+        else														// Ñ¡ÏîoptionsÖĞµÄ²¿·Ö¿ØÖÆ×Ö·û
         {
             switch(options[i])
             {
-                case '\t':   cout << "[Tab] ";   break;					// é€‰é¡¹ä¸­çš„Tabå­—ç¬¦'\t'ï¼ˆå³ASCIIç¼–ç 9ï¼‰
-                case '\x1b': cout << "[Esc] ";   break;					// é€‰é¡¹ä¸­çš„Escå­—ç¬¦'\x1b'ï¼ˆå³ASCIIç¼–ç 27ï¼‰
-                case ' ':    cout << "[Space] "; break;					// é€‰é¡¹ä¸­çš„ç©ºæ ¼å­—ç¬¦' 'ï¼ˆå³ASCIIç¼–ç 32ï¼‰
+                case '\t':   cout << "[Tab] ";   break;					// Ñ¡ÏîÖĞµÄTab×Ö·û'\t'£¨¼´ASCII±àÂë9£©
+                case '\x1b': cout << "[Esc] ";   break;					// Ñ¡ÏîÖĞµÄEsc×Ö·û'\x1b'£¨¼´ASCII±àÂë27£©
+                case ' ':    cout << "[Space] "; break;					// Ñ¡ÏîÖĞµÄ¿Õ¸ñ×Ö·û' '£¨¼´ASCII±àÂë32£©
             }
         }
     }
-    cout << "\b}: ";					// '\b'é€€æ ¼ã€‚å…ˆé€€ä¸€æ ¼ï¼Œåœ¨è¾“å‡ºå³èŠ±æ‹¬å·
+    cout << "\b}: ";					// '\b'ÍË¸ñ¡£ÏÈÍËÒ»¸ñ£¬ÔÚÊä³öÓÒ»¨À¨ºÅ
     do
     {
         key = getch();
-    }while(options[0]!='\0' && Pos(key, options)<0); // è‹¥optionsä¸ºç©ºé•¿åº¦ä¸º0çš„å­—ç¬¦ä¸²ï¼Œåˆ™è¾“å…¥æ— é™åˆ¶ï¼›å¦åˆ™è¾“å…¥é¡¹åº”è¯¥åœ¨optinsä¸­ã€‚
+    }while(options[0]!='\0' && Pos(key, options)<0); // ÈôoptionsÎª¿Õ³¤¶ÈÎª0µÄ×Ö·û´®£¬ÔòÊäÈëÎŞÏŞÖÆ£»·ñÔòÊäÈëÏîÓ¦¸ÃÔÚoptinsÖĞ¡£
     cout << endl;
     return key;
 }
 
 int main() {
-    void VectorTest(), StringTest(), testderivedstring(), testStringDiversity(), testStringDiversity2();
+    void testStringClass(), testVectorClass(), testderivedstring(), testStringDiversity(), testStringDiversity2();
     int key;
     while(true)
     {
-        cout << "æŠ½è±¡å‘é‡ç±»æ¨¡æ¿æ´¾ç”Ÿå’Œå¤šæ€æµ‹è¯•" << endl;
-        cout << "1 --- å‘é‡ç±»æµ‹è¯•" << endl;
-        cout << "2 --- å­—ç¬¦ç±»æ¨¡ç‰ˆæµ‹è¯•" << endl;
-        cout << "3 --- å­—ç¬¦ç±»æ´¾ç”Ÿæµ‹è¯•" << endl;
-        cout << "4 --- å­—ç¬¦ç±»å¤šæ€æµ‹è¯•1" << endl;
-        cout << "5 --- å­—ç¬¦ç±»å¤šæ€æµ‹è¯•2" << endl;
-        key = Choice("\nè¯·é€‰æ‹©", "12345\x1b");
+        cout << "³éÏóÏòÁ¿ÀàÄ£°åÅÉÉúºÍ¶àÌ¬²âÊÔ" << endl;
+        cout << "1 --- ÏòÁ¿Àà²âÊÔ" << endl;
+        cout << "2 --- ×Ö·ûÀàÄ£°æ²âÊÔ" << endl;
+        cout << "3 --- ×Ö·ûÀàÅÉÉú²âÊÔ" << endl;
+        cout << "4 --- ×Ö·ûÀà¶àÌ¬²âÊÔ1" << endl;
+        cout << "5 --- ×Ö·ûÀà¶àÌ¬²âÊÔ2" << endl;
+        key = Choice("\nÇëÑ¡Ôñ", "12345\x1b");
         cout << "\n\n";
-        if(key==27)		// '\x1b'ç­‰äº27ï¼ŒæŒ‡ESCé”®
+        if(key==27)		// '\x1b'µÈÓÚ27£¬Ö¸ESC¼ü
             break;
         switch(key)
         {
-            case '1':	VectorTest();			        break;
-            case '2':	StringTest();	                break;
+            case '1':	testVectorClass();			    break;
+            case '2':	testStringClass();	            break;
             case '3':	testderivedstring();			break;
             case '4':	testStringDiversity();			break;
             case '5':	testStringDiversity2();			break;
