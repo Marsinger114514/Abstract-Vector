@@ -153,24 +153,55 @@ void String::putin(istream& in) {
 }
 
 // 其他重载函数
-ostream& operator<<(ostream& out, const String& str) {
-    str.putout(out);
+ostream& operator<<(ostream& out, const VectorBase<char>& str) {
+    for (unsigned int i = 0; i < str.getsize(); ++i) {
+        out << str[i];  // 使用 VectorBase 的 operator[] 访问元素
+    }
     return out;
 }
 
-istream& operator>>(istream& in, String& str) {
-    str.putin(in);
-    return in;
+istream& operator>>(istream& in, VectorBase<char>& str) {
+    str.clear();
+
+    char ch;
+    // 逐个读取字符，直到遇到空白字符或流结束
+    while (in.get(ch)) {
+        if (isspace(ch)) {
+            break;  // 遇到空白字符时结束
+        }
+        str.push_back(ch);  // 将字符插入到 VectorBase<char> 中
+    }
+
+    return in;  // 返回输入流，以支持链式调用
 }
 
 istream& getline(istream& in, String& str, const char delim) {
-    char buffer[1024];
-    in.getline(buffer, 1024, delim);
-    str = String(buffer);
-    return in;
+    str.clear();
+
+    char ch;
+    // 逐字符读取，直到遇到指定的分隔符或流结束
+    while (in.get(ch)) {
+        if (ch == delim) {
+            break;  // 遇到分隔符时结束
+        }
+        str.push_back(ch);  // 将字符添加到 String 对象
+    }
+
+    return in;  // 返回输入流，以支持链式调用
 }
 
 int stoi(const String& str) {
-    return std::stoi(std::string(str.c_str()));
+    const char* cstr = str.c_str();
+
+    // 调用标准库中的 std::stoi 进行字符串到整数的转换
+    try {
+        return std::stoi(cstr);  // 返回转换后的整数
+    } catch (const std::invalid_argument& e) {
+        std::cerr << "Invalid argument: cannot convert to int\n";
+        return 0;  // 处理无效输入，返回默认值
+    } catch (const std::out_of_range& e) {
+        std::cerr << "Out of range: number too large\n";
+        return 0;  // 处理超出范围的输入，返回默认值
+    }
 }
 

@@ -33,8 +33,8 @@ public:
     void putin(istream& in) override;
 
     // 其他重载函数
-    friend ostream& operator<<(ostream& out, const String& str);
-    friend istream& operator>>(istream& in, String& str);
+    friend ostream& operator<<(ostream& out, const VectorBase<char>& str);
+    friend istream& operator>>(istream& in,VectorBase<char>& str);
     friend istream& getline(istream& in, String& str, const char delim);
     friend int stoi(const String& str);
 private:
