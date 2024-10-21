@@ -13,10 +13,9 @@ template <typename T>
 class VectorBase {
 public:
     VectorBase() : head(nullptr), size(0), capacity(1024) {}    // 构造函数
-    virtual ~VectorBase()    // 析构函数
-    {
+    virtual ~VectorBase() {
         delete[] head;
-    }
+    }   // 析构函数
 
     T& operator[](const unsigned int& pos) const;    // 返回下标为pos的元素
     bool operator==(const VectorBase<T>& v) const;    // 判断本向量和v是否相同

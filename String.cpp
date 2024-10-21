@@ -22,6 +22,10 @@ String::String(const char* str, const unsigned int& n) {
 
 // 拷贝构造函数
 String::String(const String& str) : VectorBase<char>(str) {
+    size = str.size;
+    capacity = str.capacity;
+    head = new char[capacity];
+    strcpy(head, str.head);
 }
 
 // 析构函数
@@ -72,11 +76,47 @@ String String::copy() const {
 }
 
 String& String::replace(const unsigned int& index, const unsigned int& len, const String& str) {
-    if (index + len > size) {
+    if (index > size) {
         throw std::out_of_range("Index out of range");
     }
-    strncpy(head + index, str.head, len);
-    return *this;
+
+    // 检查要替换的长度是否有效
+    if (index + len > size) {
+        throw std::out_of_range("Length exceeds current string size");
+    }
+
+    unsigned int newLen = str.size; // 新字符串的长度
+    unsigned int newSize = size - len + newLen; // 计算替换后的新大小
+
+    // 如果新大小超过当前容量，需扩展容量
+    if (newSize >= capacity) {
+        // 扩展容量
+        unsigned int newCapacity = std::max(2 * capacity, newSize + 1); // 新容量至少是当前容量的两倍
+        char* newHead = new char[newCapacity];
+
+        // 复制 index 之前的内容
+        strncpy(newHead, head, index);
+
+        // 插入新字符串
+        strncpy(newHead + index, str.head, newLen);
+
+        // 复制 index + len 之后的内容
+        strncpy(newHead + index + newLen, head + index + len, size - (index + len));
+
+        // 添加结束符
+        newHead[newSize] = '\0';
+
+        delete[] head; // 释放旧内存
+        head = newHead; // 更新指针
+        capacity = newCapacity; // 更新容量
+    } else {
+        // 当前容量足够，直接进行替换
+        memmove(head + index + newLen, head + index + len, size - (index + len) + 1); // +1 确保包括 '\0'
+        strncpy(head + index, str.head, newLen); // 插入新字符串
+    }
+
+    size = newSize; // 更新字符串大小
+    return *this; // 返回自身引用
 }
 
 String String::substr(const int& index, const int& len) const {

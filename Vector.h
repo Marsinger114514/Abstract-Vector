@@ -17,7 +17,16 @@ public:
 	}
 
 	// 拷贝构造函数
-	Vector(const Vector<T>& v) : VectorBase<T>(v) {}
+	Vector(const Vector<T>& v) : VectorBase<T>() {
+		this->size = v.size;
+		this->capacity = v.capacity;
+		this->head = new T[this->capacity]; // 分配新的内存
+
+		// 复制元素
+		for (unsigned int i = 0; i < this->size; ++i) {
+			this->head[i] = v.head[i];
+		}
+	}
 
 	// 析构函数
 	~Vector() {

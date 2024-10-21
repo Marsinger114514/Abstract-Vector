@@ -39,6 +39,13 @@ public:
     friend int stoi(const String& str);
 private:
     void setString(const char* str, unsigned int len);
+    void resize() {
+        capacity *= 2; // 将容量翻倍
+        char* newHead = new char[capacity];
+        strcpy(newHead, head); // 复制原始内容
+        delete[] head; // 释放旧内存
+        head = newHead; // 更新指针
+    }
 };
 
 #endif
