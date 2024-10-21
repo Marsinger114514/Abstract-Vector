@@ -12,45 +12,45 @@ using namespace std;
 template <typename T>
 class VectorBase {
 public:
-    VectorBase() : head(nullptr), size(0), capacity(1024) {}    // æ„é€ å‡½æ•°
+    VectorBase() : head(nullptr), size(0), capacity(1024) {}    // ¹¹Ôìº¯Êı
 
-    VectorBase(const VectorBase<T>& other) : size(other.size), capacity(other.capacity)     //æ·±æ‹·è´æ„é€ 
+    VectorBase(const VectorBase<T>& other) : size(other.size), capacity(other.capacity)     //Éî¿½±´¹¹Ôì
     {
         head = new T[capacity];
         for (int i = 0; i < size; i++) {
             head[i] = other.head[i];
         }
     }
-    // æ·»åŠ æ–°çš„æ„é€ å‡½æ•°ï¼Œç”¨äºè®¾ç½®åˆå§‹å®¹é‡
+    // Ìí¼ÓĞÂµÄ¹¹Ôìº¯Êı£¬ÓÃÓÚÉèÖÃ³õÊ¼ÈİÁ¿
     VectorBase(unsigned int initialCapacity) : head(nullptr), size(0), capacity(initialCapacity) {
         if (capacity > 0) {
             head = new T[capacity];
         }
     }
-    virtual ~VectorBase()    // ææ„å‡½æ•°
+    virtual ~VectorBase()    // Îö¹¹º¯Êı
     {
         clear();
         delete[] head;
     }
 
-    T& operator[](const unsigned int& pos) const;    // è¿”å›ä¸‹æ ‡ä¸ºposçš„å…ƒç´ 
-    bool operator==(const VectorBase<T>& v) const;    // åˆ¤æ–­æœ¬å‘é‡å’Œvæ˜¯å¦ç›¸åŒ
-    bool operator!=(const VectorBase<T>& v) const;	//åˆ¤æ–­æœ¬å‘é‡å’Œvæ˜¯å¦ä¸åŒ
-    unsigned int getsize()const;	//è¿”å›å‘é‡å¤§å°
-    unsigned int getcapacity()const;	//è¿”å›å‘é‡å®¹é‡
-    void insert(const unsigned int&, const T&, const unsigned int&);	//åœ¨posä½ç½®åæ’å…¥nä¸ªå…ƒç´ val
-    void erase(const unsigned int& pos);	//åˆ é™¤posä½ç½®çš„ä¸€ä¸ªå…ƒç´ 
-    void erase(const unsigned int& lt, const unsigned int& rt);	//åˆ é™¤ä»[left,right]é—­åŒºé—´å†…çš„æ‰€æœ‰å…ƒç´ ã€‚
-    void push_back(const T &val);	//åœ¨å°¾éƒ¨æ’å…¥ä¸€ä¸ªå…ƒç´ 
-    void pop_back();	//å¼¹å‡ºå°¾éƒ¨å…ƒç´ 
-    T back();	//è¿”å›å°¾éƒ¨å…ƒç´ 
-    T& at(const unsigned int& pos);	//è¿”å›ä¸‹æ ‡ä¸ºposçš„å…ƒç´ 
-    bool empty() const;	//åˆ¤æ–­å‘é‡æ˜¯å¦ä¸ºç©º
-    void clear();	//æ¸…é™¤å‘é‡æ‰€æœ‰å…ƒç´ 
-    void swap(VectorBase<T>& v);	//å°†æœ¬å‘é‡å’Œväº¤æ¢;
-    void reverse();	//ç¿»è½¬å‘é‡
-    virtual void putout(ostream& out) const = 0;    // çº¯è™šå‡½æ•° putout
-    virtual void putin(istream& in) = 0;    // çº¯è™šå‡½æ•° putin
+    T& operator[](const unsigned int& pos) const;    // ·µ»ØÏÂ±êÎªposµÄÔªËØ
+    bool operator==(const VectorBase<T>& v) const;    // ÅĞ¶Ï±¾ÏòÁ¿ºÍvÊÇ·ñÏàÍ¬
+    bool operator!=(const VectorBase<T>& v) const;	//ÅĞ¶Ï±¾ÏòÁ¿ºÍvÊÇ·ñ²»Í¬
+    unsigned int getsize()const;	//·µ»ØÏòÁ¿´óĞ¡
+    unsigned int getcapacity()const;	//·µ»ØÏòÁ¿ÈİÁ¿
+    void insert(const unsigned int&, const T&, const unsigned int&);	//ÔÚposÎ»ÖÃºó²åÈën¸öÔªËØval
+    void erase(const unsigned int& pos);	//É¾³ıposÎ»ÖÃµÄÒ»¸öÔªËØ
+    void erase(const unsigned int& lt, const unsigned int& rt);	//É¾³ı´Ó[left,right]±ÕÇø¼äÄÚµÄËùÓĞÔªËØ¡£
+    void push_back(const T &val);	//ÔÚÎ²²¿²åÈëÒ»¸öÔªËØ
+    void pop_back();	//µ¯³öÎ²²¿ÔªËØ
+    T back();	//·µ»ØÎ²²¿ÔªËØ
+    T& at(const unsigned int& pos);	//·µ»ØÏÂ±êÎªposµÄÔªËØ
+    bool empty() const;	//ÅĞ¶ÏÏòÁ¿ÊÇ·ñÎª¿Õ
+    void clear();	//Çå³ıÏòÁ¿ËùÓĞÔªËØ
+    void swap(VectorBase<T>& v);	//½«±¾ÏòÁ¿ºÍv½»»»;
+    void reverse();	//·­×ªÏòÁ¿
+    virtual void putout(ostream& out) const = 0;    // ´¿Ğéº¯Êı putout
+    virtual void putin(istream& in) = 0;    // ´¿Ğéº¯Êı putin
 
 protected:
     T* head;
@@ -111,16 +111,16 @@ T& VectorBase<T>::operator[](const unsigned int& pos) const {
 template <typename T>
 void VectorBase<T>::insert(const unsigned int& pos, const T& val, const unsigned int& n) {
         if (pos < 0 || pos > size) {
-            throw std::out_of_range("ä½ç½®è¶…å‡ºèŒƒå›´");
+            throw std::out_of_range("Î»ÖÃ³¬³ö·¶Î§");
         }
         if (size + n > capacity) {
             resize();
         }
-        // å°†å…ƒç´ å‘åç§»åŠ¨nä¸ªä½ç½®
+        // ½«ÔªËØÏòºóÒÆ¶¯n¸öÎ»ÖÃ
         for (unsigned int i = size; i > pos; --i) {
             head[i + n - 1] = head[i - 1];
         }
-        // åœ¨posä½ç½®æ’å…¥nä¸ªvalå…ƒç´ 
+        // ÔÚposÎ»ÖÃ²åÈën¸övalÔªËØ
         for (unsigned int i = 0; i < n; ++i) {
             head[pos + i] = val;
         }
@@ -128,10 +128,10 @@ void VectorBase<T>::insert(const unsigned int& pos, const T& val, const unsigned
     }
 template <typename T>
 void VectorBase<T>::erase(const unsigned int& pos) {
-    if (pos >= size) { // æ³¨æ„ï¼šåº”è¯¥æ˜¯ >= size è€Œä¸æ˜¯ > size
+    if (pos >= size) { // ×¢Òâ£ºÓ¦¸ÃÊÇ >= size ¶ø²»ÊÇ > size
         throw std::out_of_range("Index out of range");
     }
-    std::move(head + pos + 1, head + size, head + pos); // ä½¿ç”¨ std::move
+    std::move(head + pos + 1, head + size, head + pos); // Ê¹ÓÃ std::move
     size--;
 }
 

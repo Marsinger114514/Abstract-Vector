@@ -1,93 +1,64 @@
-#include <iostream>
 #include "String.h"
+#include <iostream>
+#include <string>
+using namespace std;
 
 void testStringClass() {
-    try {
-        // é»˜è®¤æž„é€ å‡½æ•°
-        String str1;
-        std::cout << "Default constructed string: '" << str1 << "' (length: " << str1.length() << ")" << std::endl;
+    // ²âÊÔ¹¹Ôìº¯Êý
+    cout << "=== Testing Constructors ===" << endl;
+    String s1("Hello");
+    cout << "s1: " << s1 << endl;
 
-        // C é£Žæ ¼å­—ç¬¦ä¸²æž„é€ å‡½æ•°
-        String str2("Hello");
-        std::cout << "C-string constructed string: '" << str2 << "' (length: " << str2.length() << ")" << std::endl;
+    String s2("World", 3);
+    cout << "s2 (with length 3): " << s2 << endl;
 
-        // æ‹·è´æž„é€ å‡½æ•°
-        String str3(str2);
-        std::cout << "Copy constructed string: '" << str3 << "' (length: " << str3.length() << ")" << std::endl;
+    String s3(s1);
+    cout << "s3 (copy of s1): " << s3 << endl;
 
-        // ç§»åŠ¨æž„é€ å‡½æ•°
-        String str4(std::move(str3));
-        std::cout << "Move constructed string: '" << str4 << "' (length: " << str4.length() << ")" << std::endl;
-        std::cout << "Original string after move: '" << str3 << "' (length: " << str3.length() << ")" << std::endl;
+    // ²âÊÔÔËËã·ûÖØÔØ
+    cout << "\n=== Testing Operator Overloads ===" << endl;
+    String s4 = s1 + s2;
+    cout << "s4 (s1 + s2): " << s4 << endl;
 
-        // æ‹·è´èµ‹å€¼è¿ç®—ç¬¦
-        str1 = str2;
-        std::cout << "After copy assignment, str1: '" << str1 << "' (length: " << str1.length() << ")" << std::endl;
+    s1 += s2;
+    cout << "s1 after s1 += s2: " << s1 << endl;
 
-        // ç§»åŠ¨èµ‹å€¼è¿ç®—ç¬¦
-        str1 = std::move(str4);
-        std::cout << "After move assignment, str1: '" << str1 << "' (length: " << str1.length() << ")" << std::endl;
-        std::cout << "Original string after move assignment: '" << str4 << "' (length: " << str4.length() << ")" << std::endl;
+    cout << "Is s1 < s2? " << (s1 < s2 ? "Yes" : "No") << endl;
+    cout << "Is s1 <= s2? " << (s1 <= s2 ? "Yes" : "No") << endl;
+    cout << "Is s1 > s2? " << (s1 > s2 ? "Yes" : "No") << endl;
+    cout << "Is s1 >= s2? " << (s1 >= s2 ? "Yes" : "No") << endl;
 
-        // ä¸‹æ ‡è¿ç®—ç¬¦
-        std::cout << "Character at index 1: " << str1[1] << std::endl;
-        try {
-            std::cout << "Character at index 100: " << str1[100] << std::endl;
-        } catch (const std::out_of_range& e) {
-            std::cout << "Caught exception: " << e.what() << std::endl;
-        }
+    // ²âÊÔ×Ö·û´®²Ù×÷
+    cout << "\n=== Testing String Operations ===" << endl;
+    cout << "s1.c_str(): " << s1.c_str() << endl;
 
-        // å­—ç¬¦ä¸²è¿žæŽ¥è¿ç®—ç¬¦
-        String str5 = str1 + str2;
-        std::cout << "Concatenated string: '" << str5 << "' (length: " << str5.length() << ")" << std::endl;
+    String s5 = s1.copy();
+    cout << "s5 (copy of s1): " << s5 << endl;
 
-        // å­—ç¬¦ä¸²è¿½åŠ è¿ç®—ç¬¦
-        str1 += str2;
-        std::cout << "Appended string: '" << str1 << "' (length: " << str1.length() << ")" << std::endl;
+    s1.replace(0, 5, String("Hi"));
+    cout << "s1 after replacing 'Hello' with 'Hi': " << s1 << endl;
 
-        // æ¯”è¾ƒè¿ç®—ç¬¦
-        std::cout << "str1 == str2: " << (str1 == str2) << std::endl;
-        std::cout << "str1 != str2: " << (str1 != str2) << std::endl;
-        std::cout << "str1 < str2: " << (str1 < str2) << std::endl;
-        std::cout << "str1 <= str2: " << (str1 <= str2) << std::endl;
-        std::cout << "str1 > str2: " << (str1 > str2) << std::endl;
-        std::cout << "str1 >= str2: " << (str1 >= str2) << std::endl;
+    String s6 = s5.substr(0, 5);
+    cout << "s6 (substring of s5 from 0, length 5): " << s6 << endl;
 
-        // æµè¿ç®—ç¬¦
-        std::cout << "Enter a string: ";
-        String str6;
-        std::cin >> str6;
-        std::cout << "You entered: " << str6 << std::endl;
+    s5.append(String(" Again"), 6);
+    cout << "s5 after appending ' Again': " << s5 << endl;
 
-        // æ¸…ç©ºå­—ç¬¦ä¸²æ•°æ®
-        str6.clear();
-        std::cout << "After clear, str6: '" << str6 << "' (length: " << str6.length() << ", empty: " << std::boolalpha << str6.empty() << ")" << std::endl;
+    // ²âÊÔÊäÈëÊä³öº¯Êý
+    cout << "\n=== Testing I/O Functions ===" << endl;
+    cout << "Enter a string: ";
+    String s7;
+    cin >> s7;
+    cout << "You entered: " << s7 << endl;
 
-        // è¿”å›žå­—ç¬¦ä¸²çš„å‰¯æœ¬
-        String str7 = str1.copy();
-        std::cout << "Copied string: '" << str7 << "' (length: " << str7.length() << ")" << std::endl;
+    cout << "Enter a string with a delimiter (e.g., Hello, World!): ";
+    String s8;
+    getline(cin, s8, ',');
+    cout << "String read until delimiter: " << s8 << endl;
 
-        // è¿”å›žå­—ç¬¦ä¸²çš„å¤§å°
-        std::cout << "Size of str1: " << str1.size() << std::endl;
-
-        // åˆ¤æ–­å­—ç¬¦ä¸²æ˜¯å¦ä¸ºç©º
-        std::cout << "Is str1 empty? " << std::boolalpha << str1.empty() << std::endl;
-
-        // é€†è½¬å­—ç¬¦ä¸²
-        str1.reverse();
-        std::cout << "Reversed string: '" << str1 << "' (length: " << str1.length() << ")" << std::endl;
-        str1.reverse(); // Reverse back to original for further tests
-
-        // è¿½åŠ å­—ç¬¦ä¸²
-        str1.append(" World");
-        std::cout << "Appended ' World': '" << str1 << "' (length: " << str1.length() << ")" << std::endl;
-
-        // æ“¦é™¤æŒ‡å®šä½ç½®çš„å­ä¸²
-        str1.erase(5, 5); // Erase " World"
-        std::cout << "After erase ' Hello': '" << str1 << "' (length: " << str1.length() << ")" << std::endl;
-    } catch (const std::exception& e) {
-        std::cerr << "Caught an exception: " << e.what() << std::endl;
-    }
+    // ²âÊÔ stoi º¯Êý
+    cout << "\n=== Testing stoi Function ===" << endl;
+    String s9("12345");
+    int number = stoi(s9);  // µ÷ÓÃ×Ô¶¨ÒåµÄ stoi º¯Êý
+    cout << "Integer value of s9 ('12345'): " << number << endl;
 }
-
-
