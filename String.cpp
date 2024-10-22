@@ -137,17 +137,14 @@ String& String::append(const String& str, const unsigned int& len) {
     return *this;
 }
 
-// 纯虚函数的实现
+
 void String::putout(ostream& out) const {
     out << head;
 }
 
 void String::putin(istream& in) {
-    char buffer[1024];
-    in >> buffer;
-    *this = String(buffer);
+    in >> head; // 直接读取到 std::string
 }
-
 // 其他重载函数
 ostream& operator<<(ostream& out, const VectorBase<char>& str) {
     for (unsigned int i = 0; i < str.getsize(); ++i) {
