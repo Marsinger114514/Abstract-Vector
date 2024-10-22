@@ -44,8 +44,8 @@ int main() {
     while(true)
     {
         cout << "抽象向量类模板派生和多态测试" << endl;
-        cout << "1 --- 向量类测试" << endl;
-        cout << "2 --- 字符类模版测试" << endl;
+        cout << "1 --- 向量类模版测试" << endl;
+        cout << "2 --- 字符类测试" << endl;
         cout << "3 --- 字符类派生测试" << endl;
         cout << "4 --- 字符类多态测试1" << endl;
         cout << "5 --- 字符类多态测试2" << endl;
