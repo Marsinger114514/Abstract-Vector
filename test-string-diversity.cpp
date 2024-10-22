@@ -1,6 +1,7 @@
 #include "String.h"
 #include"Vector.h"
 #include "VectorBase.h"
+#include "Vector.h"
 #include <iostream>
 #include <string>
 #include <sstream>

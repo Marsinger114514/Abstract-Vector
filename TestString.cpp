@@ -34,13 +34,13 @@ void testStringClass() {
     cout << "s5 (copy of s1): " << s5 << endl;
 
     s1.replace(0, 5, s2);
-    cout << "s1 after replacing 'Hello' with 'Hi': " << s1 << endl;
+    cout << "s1 after replacing 'Hello' with s2: " << s1 << endl;
 
     String s6 = s5.substr(0, 5);
     cout << "s6 (substring of s5 from 0, length 5): " << s6 << endl;
 
     s5.append(s1, 6);
-    cout << "s5 after appending ' Again': " << s5 << endl;
+    cout << "s5 after appending s1: " << s5 << endl;
 
     // ²âÊÔÊäÈëÊä³öº¯Êý
     cout << "\n=== Testing I/O Functions ===" << endl;
