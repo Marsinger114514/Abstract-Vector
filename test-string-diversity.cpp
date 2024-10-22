@@ -1,4 +1,5 @@
 #include "String.h"
+#include"Vector.h"
 #include "VectorBase.h"
 #include <iostream>
 #include <string>
