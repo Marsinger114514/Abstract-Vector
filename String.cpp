@@ -139,7 +139,7 @@ String& String::append(const String& str, const unsigned int& len) {
 
 
 void String::putout(ostream& out) const {
-    out << head;
+    out << head<<endl;
 }
 
 void String::putin(istream& in) {
