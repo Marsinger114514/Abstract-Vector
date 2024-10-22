@@ -3,107 +3,152 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-//µ¥¶À²âÊÔÅÉÉúÀà
+//å•ç‹¬æµ‹è¯•æ´¾ç”Ÿç±»
 void testderivedstring() {
     String str1;
     String str2;
 
-    // Ê¹ÓÃ putin ·½·¨³õÊ¼»¯ str1
+    // ä½¿ç”¨ putin æ–¹æ³•åˆå§‹åŒ– str1
     std::cout << "Please enter a string: ";
     str1.putin(std::cin);
 
-    // Êä³öÌáÊ¾ĞÅÏ¢
+    // è¾“å‡ºæç¤ºä¿¡æ¯
     std::cout << "The string read: ";
     str1.putout(std::cout);
 }
 
-//ÁªºÏ²âÊÔ
+//è”åˆæµ‹è¯•
 void testStringDiversity() {
-    // Ä¬ÈÏ¹¹Ôìº¯Êı
-    String str1;
+    // åˆ›å»ºä¸€ä¸ªå­—ç¬¦ä¸²å¯¹è±¡å¹¶è¾“å‡º
+    String str1("hello");
     VectorBase<char>* vec1 = &str1;
-    std::cout << "Ä¬ÈÏ¹¹Ôìº¯Êı: ´óĞ¡ = " << vec1->getsize() << std::endl;
+    cout << "str1 ="<<str1 << endl; // è¾“å‡º str1
+    std::cout << "size of str1 = " << vec1->getsize() << std::endl;
 
-    // ¿½±´¹¹Ôìº¯Êı
-    String str2;
-    std::istringstream initStream("HelloWorld");
-    str2.putin(initStream);
-
-    String str3(str2);  // Ê¹ÓÃ¿½±´¹¹Ôìº¯Êı
+    // åˆ›å»ºå¦ä¸€ä¸ªå­—ç¬¦ä¸²å¯¹è±¡å¹¶æ‹·è´æ„é€ ä¸€ä¸ªæ–°çš„å¯¹è±¡
+    String str2("HelloWorld");
+    String str3(str2);
     VectorBase<char>* vec2 = &str2;
     VectorBase<char>* vec3 = &str3;
-    std::cout << "¿½±´¹¹Ôì: str2 = ";
-    vec2->putout(std::cout);
-    std::cout << "str3 = ";
-    vec3->putout(std::cout);
+    cout << "str2 ="<<str2 << endl; // è¾“å‡º str2
+    cout << "str3 ="<<str3 << endl; // è¾“å‡º str3
 
+    // åœ¨ str2 çš„ä½ç½® 5 æ’å…¥ 'X' ä¸‰æ¬¡
+    vec2->insert(5, 'X', 3);
+    std::cout << "str2.insert(5, 'X', 3)=  ";
+    cout << str2 << endl;
+    std::cout << "size of str2 = " << vec2->getsize() << std::endl;
 
+    // è¾“å‡º str3
+    std::cout << "str3 = " << str3 << std::endl;
+    try {
+        vec2->erase(0);
+        std::cout << "str2.erase(0) =  ";
+        cout << str2 << endl;
+        std::cout << "str2.erase(100) =  ";
+        vec2->erase(100);
+    } catch (const std::out_of_range& e) {
+        cout << "error: " << e.what() << endl;
+    }
+
+    try {
+        // ä» str2 çš„ä½ç½® 5 å¼€å§‹åˆ é™¤ 7 ä¸ªå­—ç¬¦
+        vec2->erase(5, 7);
+        std::cout << "str2.erase(5, 7) =  ";
+        cout << str2 << endl;
+        std::cout << "size of str2 = " << vec2->getsize() << std::endl;
+
+        // å°è¯•åˆ é™¤è¶…å‡ºèŒƒå›´çš„å­—ç¬¦ï¼ˆåº”è¯¥æŠ›å‡ºå¼‚å¸¸ï¼‰
+        std::cout << "str2.erase(100) =  ";
+        vec2->erase(100, 200);
+
+    } catch (int) {
+        cout << "error" << endl;
+    }
+
+    // æ£€æŸ¥ str2 æ˜¯å¦ä¸ºç©º
+    std::cout << "str2.empty : " << (vec2->empty() ? "yes" : "no") << std::endl;
+
+    // æ¸…ç©º str2
+    vec2->clear();
+    std::cout << "after clear,size of str2 = " << vec2->getsize() << std::endl;
+    std::cout << "str2.empty : " << (vec2->empty() ? "yes" : "no") << std::endl;
+
+    // åˆ›å»ºä¸€ä¸ªæ–°çš„å­—ç¬¦ä¸²å¯¹è±¡å¹¶åè½¬
+    String str4("abcde");
+    cout <<"str4 ="<< str4 << endl;
+    VectorBase<char>* vec4 = &str4;
+    vec4->reverse();
+
+    cout << "str4.reverse():"<<str4 << endl;
+
+    // äº¤æ¢ str4 å’Œ str1 çš„å†…å®¹
+    vec4->swap(str1);
+    std::cout << "str4.swap(str2) : " << str4 << " " << str1 << endl;
+
+    try {
+        cout << "str4[0] : " << str4[0] << endl;
+        cout << "str4[100] : " << str4[100]  ;
+    }catch (const std::out_of_range& e) {
+        cout << "error: " << e.what() << endl;
+    }
 }
 void testStringDiversity2() {
-    // Ä¬ÈÏ¹¹Ôìº¯Êı
-    String str1;
-    VectorBase<char>* vec1 = &str1;
-    std::cout << "Ä¬ÈÏ¹¹Ôìº¯Êı: ´óĞ¡ = " << vec1->getsize() << std::endl;
+    // åˆ›å»ºä¸€ä¸ª Vector<int> å¯¹è±¡å¹¶è¾“å‡º
+    Vector<int> vec1;
+    vec1.push_back(1);
+    vec1.push_back(2);
+    vec1.push_back(3);
+    VectorBase<int>* base1 = &vec1;
+    std::cout << "vec1: " ; // è¾“å‡º vec1
+    vec1.putout(std::cout);
+    std::cout << "size of vec1: " << base1->getsize() << std::endl;
 
-    // ¿½±´¹¹Ôìº¯Êı
-    String str2;
-    std::istringstream initStream("HelloWorld");
-    str2.putin(initStream);
-    String str3(str2);  // Ê¹ÓÃ¿½±´¹¹Ôìº¯Êı
-    VectorBase<char>* vec2 = &str2;
-    VectorBase<char>* vec3 = &str3;
-    std::cout << "¿½±´¹¹Ôìº¯Êı: str2 = ";
-    vec2->putout(std::cout);
-    std::cout << "str3 = ";
-    vec3->putout(std::cout);
+    // åˆ›å»ºå¦ä¸€ä¸ª Vector<int> å¯¹è±¡å¹¶æ‹·è´æ„é€ ä¸€ä¸ªæ–°çš„å¯¹è±¡
+    Vector<int> vec2;
+    vec2.push_back(4);
+    vec2.push_back(5);
+    vec2.push_back(6);
+    Vector<int> vec3(vec2);
+    VectorBase<int>* base2 = &vec2;
+    VectorBase<int>* base3 = &vec3;
 
-    // getsize ·½·¨
-    std::cout << "getsize ·½·¨ (³õÊ¼): ´óĞ¡ = " << vec2->getsize() << std::endl;
+    std::cout << "vec2: " ; // è¾“å‡º vec2
+    vec2.putout(std::cout);
+    std::cout << "vec3: " ; // è¾“å‡º vec3
+    vec3.putout(std::cout);
+    // åœ¨ vec2 ä¸­æ’å…¥å…ƒç´ 
+    base2->push_back(7);
+    std::cout << "vec2,pushback(7): " ;
+    vec2.putout(std::cout);
+    std::cout << "size of vec2 : " << base2->getsize() << std::endl;
 
-    // insert ·½·¨
-    vec2->insert(5, 'X', 3);
-    std::cout << "insert ·½·¨ (²åÈë 'XXX' ÔÚÎ»ÖÃ 5): ";
-    vec2->putout(std::cout);
-    std::cout << "´óĞ¡ = " << vec2->getsize() << std::endl;
+    // ä½¿ç”¨ += è¿ç®—ç¬¦
+   try {
+       std::cout << "vec2 += vec1 : ";
+       vec2 += vec1;
+       vec2.putout(std::cout);
+       std::cout << "size of vec2 : " << base2->getsize() << std::endl;
+   }catch(int) {cout<<"error"<<endl;}
+     vec2.erase(0);
+    std::cout << "after str2.erase(0),vec2 :";
+    vec2.putout(std::cout);
+    vec2 += vec1;
+    std::cout << "vec2 += vec1: ";
+    vec2.putout(std::cout);
+    std::cout << "size of vec2 : " << base2->getsize() << std::endl;
+    // ä½¿ç”¨ + è¿ç®—ç¬¦
+   try {
+       Vector<int> vec4 = vec2 + vec3;
+       VectorBase<int>* base4 = &vec4;
+       std::cout << "vec4 = vec2 + vec3: "  ;
+       vec4.putout(std::cout);
+       std::cout << "size of vec4: " << base4->getsize() << std::endl;
+   }catch(int){cout << "error" << endl;}
 
-    // erase ·½·¨
-    vec2->erase(5, 7);
-    std::cout << "erase ·½·¨ (É¾³ıÎ»ÖÃ 5 µ½ 7): ";
-    vec2->putout(std::cout);
-    std::cout << "´óĞ¡ = " << vec2->getsize() << std::endl;
+    // æ¸…ç©º vec2
+    base2->clear();
+    std::cout << "after clear ,size of vec2 : " << base2->getsize() << std::endl;
 
-    // putin ·½·¨
-    std::istringstream iss("NewWorld");
-    vec2->putin(iss);
-    std::cout << "putin ·½·¨ (¶ÁÈ¡ 'NewWorld'): ";
-    vec2->putout(std::cout);
 
-    // push_back ·½·¨
-    vec2->push_back('!');
-    std::cout << "push_back ·½·¨ (Ìí¼Ó '!'): ";
-    vec2->putout(std::cout);
-
-    // pop_back ·½·¨
-    vec2->pop_back();
-    std::cout << "pop_back ·½·¨ (ÒÆ³ı×îºóÒ»¸ö×Ö·û): ";
-    vec2->putout(std::cout);
-
-    // back ·½·¨
-    std::cout << "back ·½·¨ (Î²²¿×Ö·û): " << vec2->back() << std::endl;
-
-    // at ·½·¨
-    std::cout << "at ·½·¨ (Î»ÖÃ 3 µÄ×Ö·û): " << vec2->at(3) << std::endl;
-
-    // empty ·½·¨
-    std::cout << "empty ·½·¨ (³õÊ¼): " << (vec2->empty() ? "ÊÇ" : "·ñ") << std::endl;
-    vec2->clear();
-    std::cout << "clear ·½·¨: ´óĞ¡ = " << vec2->getsize() << std::endl;
-    std::cout << "empty ·½·¨ (Çå³ıºó): " << (vec2->empty() ? "ÊÇ" : "·ñ") << std::endl;
-
-    // reverse ·½·¨
-    std::istringstream initStream3("abcde");
-    vec2->putin(initStream);
-    vec2->reverse();
-    std::cout << "reverse ·½·¨: ";
-    vec2->putout(std::cout);
 }
