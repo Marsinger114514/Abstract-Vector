@@ -20,7 +20,7 @@ void testderivedstring() {
 }
 
 //联合测试
-void testDiversity1() {
+void testStringDiversity() {
     // 创建一个字符串对象并输出
     String str1("hello");
     VectorBase<char>* vec1 = &str1;
@@ -88,14 +88,42 @@ void testDiversity1() {
     vec4->swap(str1);
     std::cout << "str4.swap(str2) : " << str4 << " " << str1 << endl;
 
+    //测试[]
     try {
         cout << "str4[0] : " << str4[0] << endl;
         cout << "str4[100] : " << str4[100]  ;
     }catch (const std::out_of_range& e) {
         cout << "error: " << e.what() << endl;
     }
+
+    //测试putin和putout
+    String str5;
+    VectorBase<char>* vec5 = &str5;
+    cout<<"please input str5: ";
+    vec5->putin(cin);
+    cout<<"str5 :  "<<str5;
+    vec5->putout(cout);
+
+    //测试!=
+    cout<<endl;
+    VectorBase<char>* vec6 = new String("apple");
+    VectorBase<char>* vec7 = new String("banana");
+    VectorBase<char>* vec8= new String("apple");
+
+    // 测试不等于运算符
+    std::cout << "Is str6(apple) != str7(banana)? " << (*vec6 != *vec7 ? "Yes" : "No") << std::endl;
+    std::cout << "Is str6(apple) != str8(apple)? " << (*vec6 != *vec8 ? "Yes" : "No") << std::endl;
+    delete vec1;
+    delete vec2;
+    delete vec3;
+    delete vec4;
+    delete vec5;
+    delete vec6;
+    delete vec7;
+    delete vec8;
+
 }
-void testDiversity2() {
+void testStringDiversity2() {
     // 创建一个 Vector<int> 对象并输出
     Vector<int> vec1;
     vec1.push_back(1);
@@ -131,14 +159,17 @@ void testDiversity2() {
        vec2 += vec1;
        vec2.putout(std::cout);
        std::cout << "size of vec2 : " << base2->getsize() << std::endl;
-   }catch(int) {cout<<"error"<<endl;}
-     vec2.erase(0);
+   }   catch(int) {cout<<"error"<<endl;}
+
+
+    vec2.erase(0);
     std::cout << "after str2.erase(0),vec2 :";
     vec2.putout(std::cout);
     vec2 += vec1;
     std::cout << "vec2 += vec1: ";
     vec2.putout(std::cout);
     std::cout << "size of vec2 : " << base2->getsize() << std::endl;
+
     // 使用 + 运算符
    try {
        Vector<int> vec4 = vec2 + vec3;
@@ -151,6 +182,42 @@ void testDiversity2() {
     // 清空 vec2
     base2->clear();
     std::cout << "after clear ,size of vec2 : " << base2->getsize() << std::endl;
+
+    cout<<"test at()"<<std::endl;
+    for (unsigned int i = 0; i < base1->getsize(); ++i) {
+        std::cout << "vec[" << i << "] = " << base1->at(i) << std::endl;
+    }
+    try {
+        Vector<int> vec5;
+        VectorBase<int>* base5 = &vec5;
+        std::cout << "vec5.at(0) : ";
+        base5->at(0);
+    }catch(int) {cout<<"error"<<endl;}
+
+    // 测试 back
+    try {
+        std::cout << "vec1: " ;
+        vec1.putout(std::cout);
+        std::cout << "Last element of vec1: " << base1->back() << std::endl;
+
+        Vector<int> vec5;
+        VectorBase<int>* base5 = &vec5;
+        std::cout << "Last element of vec5: ";
+        base5->back();
+    }catch(int) {cout<<"error"<<endl;}
+
+    // 测试 pop_back
+    base1->pop_back();
+    std::cout << "After pop_back,last element of vec1: " << base1->back() << std::endl;
+    try {
+        Vector<int> vec5;
+        VectorBase<int>* base5 = &vec5;
+        std::cout << "After pop_back,last element of vec5: ";
+        base5->pop_back();
+    }catch(int) {cout<<"error"<<endl;}
+    delete base1;
+    delete base2;
+    delete base3;
 
 
 }
