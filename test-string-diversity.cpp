@@ -20,7 +20,7 @@ void testderivedstring() {
 }
 
 //联合测试
-void testStringDiversity() {
+void testDiversity1() {
     // 创建一个字符串对象并输出
     String str1("hello");
     VectorBase<char>* vec1 = &str1;
@@ -95,7 +95,7 @@ void testStringDiversity() {
         cout << "error: " << e.what() << endl;
     }
 }
-void testStringDiversity2() {
+void testDiversity2() {
     // 创建一个 Vector<int> 对象并输出
     Vector<int> vec1;
     vec1.push_back(1);

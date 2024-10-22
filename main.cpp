@@ -39,7 +39,7 @@ int Choice(const char *prompt, const char *options)		// 函数定义。输出提示信息pr
 }
 
 int main() {
-    void testStringClass(), testVectorClass(), testderivedstring(), testStringDiversity(), testStringDiversity2();
+    void testStringClass(), testVectorClass(), testderivedstring(), testDiversity1(), testDiversity2();
     int key;
     while(true)
     {
@@ -47,8 +47,8 @@ int main() {
         cout << "1 --- 向量类模版测试" << endl;
         cout << "2 --- 字符类测试" << endl;
         cout << "3 --- 字符类派生测试" << endl;
-        cout << "4 --- 字符类多态测试1" << endl;
-        cout << "5 --- 字符类多态测试2" << endl;
+        cout << "4 --- 字符类多态测试" << endl;
+        cout << "5 --- 向量类多态测试" << endl;
         key = Choice("\n请选择", "12345\x1b");
         cout << "\n\n";
         if(key==27)		// '\x1b'等于27，指ESC键
@@ -58,8 +58,8 @@ int main() {
             case '1':	testVectorClass();			    break;
             case '2':	testStringClass();	            break;
             case '3':	testderivedstring();			break;
-            case '4':	testStringDiversity();			break;
-            case '5':	testStringDiversity2();			break;
+            case '4':	testDiversity1();			break;
+            case '5':	testDiversity2();			break;
         }
     }
     return 0;

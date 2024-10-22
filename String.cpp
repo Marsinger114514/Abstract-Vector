@@ -165,7 +165,6 @@ istream& operator>>(istream& in, VectorBase<char>& str) {
 
 istream& getline(istream& in, String& str, const char delim='\n') {
     str.clear(); // 清空当前 String 对象
-
     char ch;
     // 逐字符读取，直到遇到指定的分隔符、换行符或流结束
     while (in.get(ch)) {

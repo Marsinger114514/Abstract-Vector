@@ -52,11 +52,11 @@ public:
 		return *this;
 	}
 
-		Vector<T> operator+(const Vector<T>& v) {
+	Vector<T> operator+(const Vector<T>& v) {
 		if(this->size!=v.size) {
 			throw(int)-1;
 		}
-		Vector<T> result(this->size);
+			Vector<T> result(this->size);
 		for (unsigned int i = 0; i < this->size; i++) {
 			result.push_back(this->head[i]+v.head[i]);
 		}

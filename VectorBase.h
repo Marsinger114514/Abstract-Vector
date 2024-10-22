@@ -63,8 +63,6 @@ T& VectorBase<T>::operator[](const unsigned int& pos) const {
     return head[pos];
 }
 
-
-
 template <typename T>
 bool VectorBase<T>:: operator==(const VectorBase<T>& v) const
 {
@@ -85,17 +83,18 @@ bool VectorBase<T>:: operator!=(const VectorBase<T>& v) const
         return !(*this == v);
     }
 
-    template <typename T>
-    unsigned int VectorBase<T>:: getsize() const
+template <typename T>
+unsigned int VectorBase<T>:: getsize() const
     {
         return size;
     }
 
-    template <typename T>
-    unsigned int VectorBase<T>:: getcapacity() const
+template <typename T>
+unsigned int VectorBase<T>:: getcapacity() const
     {
         return capacity;
     }
+
 template <typename T>
 void VectorBase<T>::insert(const unsigned int& pos, const T& val, const unsigned int& n) {
         if (pos < 0 || pos > size) {
@@ -114,6 +113,7 @@ void VectorBase<T>::insert(const unsigned int& pos, const T& val, const unsigned
         }
         size += n;
     }
+
 template <typename T>
 void VectorBase<T>::erase(const unsigned int& pos) {
     if (pos >= size) { // 注意：应该是 >= size 而不是 > size
@@ -144,8 +144,8 @@ void VectorBase<T>:: push_back(const T &val)
         head[size++] = val;
     }
 
-    template <typename T>
-    void VectorBase<T>:: pop_back()
+template <typename T>
+void VectorBase<T>:: pop_back()
     {
         if (size == 0) {
             throw -1;
@@ -153,8 +153,8 @@ void VectorBase<T>:: push_back(const T &val)
         size--;
     }
 
-    template <typename T>
-    T VectorBase<T>:: back()
+template <typename T>
+T VectorBase<T>:: back()
     {
         if (size == 0)
         {
@@ -163,8 +163,8 @@ void VectorBase<T>:: push_back(const T &val)
         return head[size - 1];
     }
 
-    template <typename T>
-    T& VectorBase<T>:: at(const unsigned int& pos)
+template <typename T>
+T& VectorBase<T>:: at(const unsigned int& pos)
     {
         if (pos < 0 || pos >= size)
         {
@@ -173,14 +173,14 @@ void VectorBase<T>:: push_back(const T &val)
         return head[pos];
     }
 
-    template <typename T>
-    bool VectorBase<T>:: empty() const
+template <typename T>
+bool VectorBase<T>:: empty() const
     {
         return size == 0;
     }
 
-    template <typename T>
-    void VectorBase<T>:: clear()
+template <typename T>
+void VectorBase<T>:: clear()
     {
         delete[] head;  // 释放内存
         head = nullptr;  // 重置指针
