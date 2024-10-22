@@ -1,6 +1,6 @@
 #include "String.h"
 #include <iostream>
-
+#include <limits>
 void testStringClass() {
     // 测试构造函数
     cout << "=== Testing Constructors ===" << endl;
@@ -53,7 +53,7 @@ void testStringClass() {
     String s8;
     getline(cin, s8, ',');
     cout << "String read until delimiter: " << s8 << endl;
-
+    cin.sync();
     // 测试 stoi 函数
     cout << "\n=== Testing stoi Function ===" << endl;
     String s9("12345");

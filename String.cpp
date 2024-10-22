@@ -154,32 +154,26 @@ ostream& operator<<(ostream& out, const VectorBase<char>& str) {
 }
 
 istream& operator>>(istream& in, VectorBase<char>& str) {
-    str.clear();
-
+    str.clear(); // 清空当前 VectorBase<char> 对象
     char ch;
-    // 逐个读取字符，直到遇到空白字符或流结束
-    while (in.get(ch)) {
-        if (isspace(ch)) {
-            break;  // 遇到空白字符时结束
-        }
-        str.push_back(ch);  // 将字符插入到 VectorBase<char> 中
+    // 逐个读取字符，直到遇到换行符或流结束
+    while (in.get(ch) && ch != '\n') {
+        str.push_back(ch); // 将字符插入到 VectorBase<char> 中
     }
-
-    return in;  // 返回输入流，以支持链式调用
+    return in; // 返回输入流，以支持链式调用
 }
 
-istream& getline(istream& in, String& str, const char delim) {
-    str.clear();
+istream& getline(istream& in, String& str, const char delim='\n') {
+    str.clear(); // 清空当前 String 对象
 
     char ch;
-    // 逐字符读取，直到遇到指定的分隔符或流结束
+    // 逐字符读取，直到遇到指定的分隔符、换行符或流结束
     while (in.get(ch)) {
-        if (ch == delim) {
-            break;  // 遇到分隔符时结束
+        if (ch == delim || ch == '\n') {
+            break;  // 遇到分隔符或换行符时结束
         }
         str.push_back(ch);  // 将字符添加到 String 对象
     }
-
     return in;  // 返回输入流，以支持链式调用
 }
 
