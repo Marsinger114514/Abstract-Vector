@@ -11,7 +11,7 @@ void testderivedstring() {
     String str2;
 
     // 使用 putin 方法初始化 str1
-    std::cout << "Please enter a string: "<<endl;
+    std::cout << "Please enter a string: ";
     str1.putin(std::cin);
 
     // 输出提示信息
