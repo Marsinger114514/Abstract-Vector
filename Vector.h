@@ -6,71 +6,73 @@
 template <typename T>
 class Vector : public VectorBase<T> {
 public:
-	// Ä¬ÈÏ¹¹Ôìº¯Êı
+	// é»˜è®¤æ„é€ å‡½æ•°
 	Vector() : VectorBase<T>() {}
 
-	// ´øÈİÁ¿²ÎÊıµÄ¹¹Ôìº¯Êı
+	// å¸¦å®¹é‡å‚æ•°çš„æ„é€ å‡½æ•°
 	Vector(const unsigned int& s) : VectorBase<T>() {
 		if (s > 0) {
 			this->capacity = s;
 		}
 	}
 
-	// ¿½±´¹¹Ôìº¯Êı
+	// æ‹·è´æ„é€ å‡½æ•°
 	Vector(const Vector<T>& v) : VectorBase<T>() {
 		this->size = v.size;
 		this->capacity = v.capacity;
-		this->head = new T[this->capacity]; // ·ÖÅäĞÂµÄÄÚ´æ
+		this->head = new T[this->capacity]; // åˆ†é…æ–°çš„å†…å­˜
 
-		// ¸´ÖÆÔªËØ
+		// å¤åˆ¶å…ƒç´ 
 		for (unsigned int i = 0; i < this->size; ++i) {
 			this->head[i] = v.head[i];
 		}
 	}
 
-	// Îö¹¹º¯Êı
+	// ææ„å‡½æ•°
 	~Vector() {}
 
-	// ÔËËã·ûÖØÔØ
+	// è¿ç®—ç¬¦é‡è½½
 	Vector<T>& operator=(const Vector<T>& v) {
 		if (this == &v) {
-			return *this;  // ¼ì²éÊÇ·ñ×ÔÎÒ¸³Öµ
+			return *this;  // æ£€æŸ¥æ˜¯å¦è‡ªæˆ‘èµ‹å€¼
 		}
 
-		// ÊÍ·Åµ±Ç°¶ÔÏóµÄÄÚ´æ
+		// é‡Šæ”¾å½“å‰å¯¹è±¡çš„å†…å­˜
 		delete[] this->head;
 
-		// ÎªĞÂ¶ÔÏó·ÖÅäÄÚ´æ²¢Éî¿½±´ÔªËØ
+		// ä¸ºæ–°å¯¹è±¡åˆ†é…å†…å­˜å¹¶æ·±æ‹·è´å…ƒç´ 
 		this->size = v.size;
 		this->capacity = v.capacity;
 		this->head = new T[this->capacity];
 
-		// ¸´ÖÆÔªËØ
+		// å¤åˆ¶å…ƒç´ 
 		for (unsigned int i = 0; i < this->size; ++i) {
 			this->head[i] = v.head[i];
 		}
 		return *this;
 	}
 
-	Vector<T> operator+(const Vector<T>& v) {
-		Vector<T> result(this->size + v.size);
-		for (unsigned int i = 0; i < this->size; i++) {
-			result.push_back(this->head[i]);
+		Vector<T> operator+(const Vector<T>& v) {
+		if(this->size!=v.size) {
+			throw(int)-1;
 		}
-		for (unsigned int i = 0; i < v.size; i++) {
-			result.push_back(v.head[i]);
+		Vector<T> result(this->size);
+		for (unsigned int i = 0; i < this->size; i++) {
+			result.push_back(this->head[i]+v.head[i]);
 		}
 		return result;
 	}
 
 	Vector<T>& operator+=(const Vector<T>& v) {
-		for (unsigned int i = 0; i < v.size; i++) {
-			this->push_back(v.head[i]);
-		}
-		return *this;
+		if(this->size!=v.size) {
+			throw(int)-1;
+		}for (unsigned int i = 0; i < v.size; i++) {
+				this->head[i]=this->head[i]+v.head[i];
+			}
+			return *this;
 	}
 
-	// ¸³Öµº¯Êı
+	// èµ‹å€¼å‡½æ•°
 	void assign(const Vector<T>& v) {
 		this->clear();
 		for (unsigned int i = 0; i < v.size; i++) {
@@ -78,7 +80,7 @@ public:
 		}
 	}
 
-	// ´¿Ğéº¯ÊıµÄÊµÏÖ
+	// çº¯è™šå‡½æ•°çš„å®ç°
 	void putout(ostream& out) const override {
 		for (unsigned int i = 0; i < this->size; i++) {
 			out << this->head[i] << " ";
