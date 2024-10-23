@@ -20,7 +20,7 @@ void testderivedstring() {
 }
 
 //联合测试
-void testStringDiversity() {
+void testDiversity1() {
     // 创建一个字符串对象并输出
     String str1("hello");
     VectorBase<char>* vec1 = &str1;
@@ -61,7 +61,7 @@ void testStringDiversity() {
         std::cout << "size of str2 = " << vec2->getsize() << std::endl;
 
         // 尝试删除超出范围的字符（应该抛出异常）
-        std::cout << "str2.erase(100) =  ";
+        std::cout << "str2.erase(100,200) =  ";
         vec2->erase(100, 200);
 
     } catch (int) {
@@ -91,7 +91,8 @@ void testStringDiversity() {
     //测试[]
     try {
         cout << "str4[0] : " << str4[0] << endl;
-        cout << "str4[100] : " << str4[100]  ;
+        cout << "str4[100] : " ;
+        cout<< str4[100]  ;
     }catch (const std::out_of_range& e) {
         cout << "error: " << e.what() << endl;
     }
@@ -101,6 +102,7 @@ void testStringDiversity() {
     VectorBase<char>* vec5 = &str5;
     cout<<"please input str5: ";
     vec5->putin(cin);
+    cin.sync();
     cout<<"str5 :  "<<str5;
     vec5->putout(cout);
 
@@ -108,22 +110,14 @@ void testStringDiversity() {
     cout<<endl;
     VectorBase<char>* vec6 = new String("apple");
     VectorBase<char>* vec7 = new String("banana");
-    VectorBase<char>* vec8= new String("apple");
+    VectorBase<char>* vec8 = new String("apple");
 
     // 测试不等于运算符
     std::cout << "Is str6(apple) != str7(banana)? " << (*vec6 != *vec7 ? "Yes" : "No") << std::endl;
     std::cout << "Is str6(apple) != str8(apple)? " << (*vec6 != *vec8 ? "Yes" : "No") << std::endl;
-    delete vec1;
-    delete vec2;
-    delete vec3;
-    delete vec4;
-    delete vec5;
-    delete vec6;
-    delete vec7;
-    delete vec8;
 
 }
-void testStringDiversity2() {
+void testDiversity2() {
     // 创建一个 Vector<int> 对象并输出
     Vector<int> vec1;
     vec1.push_back(1);
@@ -215,9 +209,7 @@ void testStringDiversity2() {
         std::cout << "After pop_back,last element of vec5: ";
         base5->pop_back();
     }catch(int) {cout<<"error"<<endl;}
-    delete base1;
-    delete base2;
-    delete base3;
+
 
 
 }
