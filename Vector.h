@@ -74,9 +74,18 @@ public:
 
 	// 赋值函数
 	void assign(const Vector<T>& v) {
-		this->clear();
+		if (this == &v) {
+			// 检查是否自我赋值
+		}
+		// 释放当前对象的内存
+		delete[] this->head;
+
+		// 为新对象分配内存并深拷贝元素
+		this->size = v.size;
+		this->capacity = v.capacity;
+		this->head = new T[this->capacity];
 		for (unsigned int i = 0; i < v.size; i++) {
-			this->push_back(v.head[i]);
+			this->head[i]=v.head[i];
 		}
 	}
 
