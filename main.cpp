@@ -3,8 +3,7 @@
 #include <conio.h>
 int Pos(char ch, const char *str)			// 返回指定字符ch在字符串str中的下标。不存在时返回-1
 {
-    int i;
-    for(i=0; str[i]!='\0'; i++)
+    for(int i=0; str[i]!='\0'; i++)
         if(ch==str[i])
             return i;
     return -1;

@@ -1,6 +1,6 @@
 #include "String.h"
 #include <iostream>
-#include <limits>
+
 void testStringClass() {
     // ²âÊÔ¹¹Ôìº¯Êı
     cout << "=== Testing Constructors ===" << endl;

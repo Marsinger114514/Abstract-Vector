@@ -1,11 +1,8 @@
-//VectorBase.h
 #ifndef VECTORBASE_H
 #define VECTORBASE_H
 #include <algorithm>
-#include <cstddef>
 #include <stdexcept>
 #include <utility>
-#include <iostream>
 #include <memory>
 using namespace std;
 
@@ -42,7 +39,7 @@ protected:
     T* head;
     unsigned int size;
 	unsigned int capacity;
-    void resize()
+    virtual void resize()
     {
     	 capacity *= 2;
          T* new_head = new T[capacity];
